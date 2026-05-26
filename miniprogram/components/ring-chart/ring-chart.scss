@@ -59,14 +59,41 @@
   border-radius: 50%;
 }
 
-.ring-pct {
-  font-size: 40rpx;
+.ring-current {
+  font-size: 44rpx;
   font-weight: 700;
   color: var(--color-text, #333);
+  line-height: 1;
 }
 
-.ring-detail {
-  font-size: 22rpx;
+.ring-divider {
+  font-size: 24rpx;
+  color: var(--color-text-light, #bbb);
+  margin: 2rpx 0;
+}
+
+.ring-target {
+  font-size: 28rpx;
+  font-weight: 600;
   color: var(--color-text-secondary, #999);
-  margin-top: 4rpx;
+}
+
+.ring-unit {
+  font-size: 20rpx;
+  color: var(--color-text-light, #bbb);
+  margin-top: 2rpx;
+  margin-bottom: 8rpx;
+}
+
+.ring-remaining {
+  font-size: 22rpx;
+  color: var(--color-primary, #07C160);
+  background: var(--color-primary-light, #E6F9EF);
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.ring-remaining.over {
+  color: var(--color-danger, #FA5151);
+  background: #FDECEC;
 }

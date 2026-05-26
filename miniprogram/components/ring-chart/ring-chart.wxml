@@ -14,7 +14,11 @@
 
   <!-- 中心文字 -->
   <view class="ring-center" style="width: {{innerSize * 2}}rpx; height: {{innerSize * 2}}rpx;">
-    <text class="ring-pct">{{pct}}%</text>
-    <text class="ring-detail">{{formatCal(current)}} / {{formatCal(target)}} kcal</text>
+    <text class="ring-current">{{current}}</text>
+    <text class="ring-divider">/</text>
+    <text class="ring-target">{{target}}</text>
+    <text class="ring-unit">kcal</text>
+    <text wx:if="{{current <= target}}" class="ring-remaining">剩余 {{target - current}} kcal</text>
+    <text wx:else class="ring-remaining over">超出 {{current - target}} kcal</text>
   </view>
 </view>

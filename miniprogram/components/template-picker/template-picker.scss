@@ -1,0 +1,127 @@
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 300;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  z-index: 301;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.sheet-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1rpx solid #F0F0F0;
+  text-align: center;
+}
+
+.sheet-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  display: block;
+}
+
+.sheet-desc {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-top: 6rpx;
+  display: block;
+}
+
+.sheet-body {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  max-height: 480rpx;
+}
+
+.pick-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #FAFAFA;
+}
+
+.pick-item:last-child {
+  border-bottom: none;
+}
+
+.pick-check {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid #D0D0D0;
+  margin-right: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.pick-check.on {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.check-mark {
+  font-size: 24rpx;
+  color: #fff;
+  font-weight: 700;
+}
+
+.pick-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.pick-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.pick-detail {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-top: 4rpx;
+}
+
+.sheet-footer {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1rpx solid #F0F0F0;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #F5F5F5;
+  color: var(--color-text-secondary);
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}
+
+.btn-confirm {
+  flex: 2;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}

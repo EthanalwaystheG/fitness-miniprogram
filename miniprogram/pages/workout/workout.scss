@@ -30,6 +30,25 @@
   color: var(--color-text-light);
 }
 
+// List header with clear
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-md) var(--spacing-sm);
+}
+
+.list-count {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+}
+
+.clear-btn {
+  font-size: 26rpx;
+  color: var(--color-danger);
+  padding: 4rpx 12rpx;
+}
+
 .exercise-card {
   margin-bottom: 4rpx;
 }
@@ -83,13 +102,22 @@
   margin-top: 8rpx;
 }
 
-.summary-bar {
+// Save as template button
+.save-tpl-btn {
   text-align: center;
-  color: var(--color-text-secondary);
-  font-size: 26rpx;
-  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-card);
+  border-radius: var(--radius);
+  border: 2rpx dashed #E0E0E0;
 }
 
+.save-tpl-btn text {
+  font-size: 26rpx;
+  color: var(--color-primary);
+}
+
+// Templates
 .template-list {
   padding: 0 var(--spacing-md);
 }
@@ -97,7 +125,6 @@
 .template-card {
   margin-bottom: var(--spacing-sm);
   padding: var(--spacing-md) var(--spacing-lg);
-  cursor: pointer;
 }
 
 .template-header {
@@ -111,6 +138,26 @@
   font-size: 30rpx;
   font-weight: 600;
   color: var(--color-text);
+}
+
+.template-right {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.template-badge {
+  font-size: 20rpx;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.template-del {
+  font-size: 24rpx;
+  color: var(--color-text-light);
+  padding: 2rpx 6rpx;
 }
 
 .template-arrow {
@@ -139,6 +186,7 @@
   border-radius: 6rpx;
 }
 
+// FAB
 .fab {
   position: fixed;
   right: 40rpx;

@@ -5,12 +5,18 @@
   <view class="section-title">个人信息</view>
   <view class="card form-card">
     <view class="form-row">
-      <text class="form-label">身高 (cm)</text>
-      <input class="form-input" type="digit" value="{{height}}" bindinput="onHeightInput" placeholder="170" />
+      <text class="form-label">身高</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" value="{{height}}" bindinput="onHeightInput" placeholder="170" />
+        <text class="form-unit">cm</text>
+      </view>
     </view>
     <view class="form-row">
-      <text class="form-label">体重 (kg)</text>
-      <input class="form-input" type="digit" value="{{weight}}" bindinput="onWeightInput" placeholder="65" />
+      <text class="form-label">体重</text>
+      <view class="form-input-wrap">
+        <input class="form-input" type="digit" value="{{weight}}" bindinput="onWeightInput" placeholder="65" />
+        <text class="form-unit">kg</text>
+      </view>
     </view>
     <view class="form-row">
       <text class="form-label">年龄</text>

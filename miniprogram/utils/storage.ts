@@ -1,4 +1,4 @@
-import type { UserProfile, WeightRecord, WorkoutRecord, DietRecord } from '../types/index';
+import type { UserProfile, WeightRecord, WorkoutRecord, DietRecord, CustomTemplate } from '../types/index';
 
 function safeGet<T>(key: string, fallback: T): T {
   try {
@@ -111,6 +111,32 @@ export function deleteDietRecord(id: string): void {
   safeSet(
     DIET_KEY,
     list.filter((d) => d.id !== id),
+  );
+}
+
+// --- Custom Templates ---
+
+const TEMPLATE_KEY = 'fitness_workout_templates';
+
+function getCustomTemplatesAll(): CustomTemplate[] {
+  return safeGet<CustomTemplate[]>(TEMPLATE_KEY, []);
+}
+
+export function getCustomTemplates(): CustomTemplate[] {
+  return getCustomTemplatesAll();
+}
+
+export function saveCustomTemplate(template: CustomTemplate): void {
+  const list = getCustomTemplatesAll();
+  list.push(template);
+  safeSet(TEMPLATE_KEY, list);
+}
+
+export function deleteCustomTemplate(id: string): void {
+  const list = getCustomTemplatesAll();
+  safeSet(
+    TEMPLATE_KEY,
+    list.filter((t) => t.id !== id),
   );
 }
 

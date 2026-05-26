@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
-    "exercise-editor": "/components/exercise-editor/exercise-editor"
+    "exercise-editor": "/components/exercise-editor/exercise-editor",
+    "template-picker": "/components/template-picker/template-picker"
   }
 }

@@ -1,0 +1,24 @@
+<view class="mask" bindtap="onCancel"></view>
+<view class="sheet">
+  <view class="sheet-header">
+    <text class="sheet-title">{{templateName}}</text>
+    <text wx:if="{{templateDesc}}" class="sheet-desc">{{templateDesc}}</text>
+  </view>
+
+  <scroll-view scroll-y class="sheet-body">
+    <view wx:for="{{items}}" wx:key="name" class="pick-item" bindtap="onToggle" data-index="{{index}}">
+      <view class="pick-check {{item.checked ? 'on' : ''}}">
+        <text wx:if="{{item.checked}}" class="check-mark">✓</text>
+      </view>
+      <view class="pick-info">
+        <text class="pick-name">{{item.name}}</text>
+        <text class="pick-detail">{{item.sets}}组 × {{item.reps}}次<text wx:if="{{item.weight > 0}}"> @ {{item.weight}}kg</text></text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="sheet-footer">
+    <button class="btn-cancel" bindtap="onCancel">取消</button>
+    <button class="btn-confirm" bindtap="onConfirm">确认添加 ({{selectedCount}})</button>
+  </view>
+</view>

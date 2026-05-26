@@ -73,3 +73,18 @@ export interface ChartDataPoint {
   date: string;
   value: number;
 }
+
+export interface TemplateExercise {
+  name: string;
+  sets: number;
+  reps: number;
+  weight: number;
+  note: string;
+}
+
+export interface CustomTemplate {
+  id: string;
+  name: string;
+  exercises: TemplateExercise[];
+  createdAt: string;
+}
