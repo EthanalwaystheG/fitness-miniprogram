@@ -17,19 +17,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "📊 概览"
+        "text": "概览",
+        "iconPath": "images/tab/dashboard.png",
+        "selectedIconPath": "images/tab/dashboard-active.png"
       },
       {
         "pagePath": "pages/workout/workout",
-        "text": "🏋️ 训练"
+        "text": "训练",
+        "iconPath": "images/tab/workout.png",
+        "selectedIconPath": "images/tab/workout-active.png"
       },
       {
         "pagePath": "pages/diet/diet",
-        "text": "🍽️ 饮食"
+        "text": "饮食",
+        "iconPath": "images/tab/diet.png",
+        "selectedIconPath": "images/tab/diet-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "👤 我的"
+        "text": "我的",
+        "iconPath": "images/tab/profile.png",
+        "selectedIconPath": "images/tab/profile-active.png"
       }
     ]
   },
