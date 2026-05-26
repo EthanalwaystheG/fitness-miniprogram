@@ -1,0 +1,20 @@
+<view class="ring-wrap" style="width: {{size}}rpx; height: {{size}}rpx;">
+  <!-- 灰色底环 -->
+  <view class="ring-bg" style="width: {{size}}rpx; height: {{size}}rpx; border-width: {{strokeWidth}}rpx; border-color: {{bgColor}};"></view>
+
+  <!-- 右半环（0% ~ 50%） -->
+  <view class="ring-half right" style="width: {{halfSize}}rpx; height: {{size}}rpx; left: {{halfSize}}rpx;">
+    <view class="ring-half-inner" style="width: {{size}}rpx; height: {{size}}rpx; left: -{{halfSize}}rpx; border-width: {{strokeWidth}}rpx; border-color: {{ringColor}}; transform: rotate({{rightDeg}}deg);"></view>
+  </view>
+
+  <!-- 左半环（50% ~ 100%），超过50%才显示 -->
+  <view wx:if="{{pct > 50}}" class="ring-half left" style="width: {{halfSize}}rpx; height: {{size}}rpx; left: 0;">
+    <view class="ring-half-inner" style="width: {{size}}rpx; height: {{size}}rpx; left: 0; border-width: {{strokeWidth}}rpx; border-color: {{ringColor}}; transform: rotate({{leftDeg}}deg);"></view>
+  </view>
+
+  <!-- 中心文字 -->
+  <view class="ring-center" style="width: {{innerSize * 2}}rpx; height: {{innerSize * 2}}rpx;">
+    <text class="ring-pct">{{pct}}%</text>
+    <text class="ring-detail">{{formatCal(current)}} / {{formatCal(target)}} kcal</text>
+  </view>
+</view>

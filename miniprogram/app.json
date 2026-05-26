@@ -17,19 +17,19 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "概览"
+        "text": "📊 概览"
       },
       {
         "pagePath": "pages/workout/workout",
-        "text": "训练"
+        "text": "🏋️ 训练"
       },
       {
         "pagePath": "pages/diet/diet",
-        "text": "饮食"
+        "text": "🍽️ 饮食"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "👤 我的"
       }
     ]
   },

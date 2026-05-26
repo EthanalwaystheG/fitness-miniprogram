@@ -1,4 +1,5 @@
-import { getDietByDate, saveDietRecord, deleteDietRecord, generateId } from '../../utils/storage';
+import { getDietByDate, saveDietRecord, deleteDietRecord, generateId, getUserProfile } from '../../utils/storage';
+import { calculateBMR, calculateTDEE } from '../../utils/bmr';
 import { today, formatDisplay } from '../../utils/date';
 import type { DietRecord, Meal, FoodItem, MealType, MacroTotals } from '../../types/index';
 
@@ -50,6 +51,7 @@ Component({
     currentMealType: 'breakfast' as MealType,
     editMealIndex: -1,
     editFoodIndex: -1,
+    calorieTarget: 2000,
   },
 
   lifetimes: {
@@ -67,6 +69,14 @@ Component({
 
   methods: {
     loadDiet() {
+      // Load TDEE target
+      const profile = getUserProfile();
+      let calorieTarget = 2000;
+      if (profile) {
+        const bmr = calculateBMR(profile.weight, profile.height, profile.age, profile.gender);
+        calorieTarget = calculateTDEE(bmr, profile.activityLevel);
+      }
+
       const record = getDietByDate(this.data.selectedDate);
       let meals = emptyMeals();
 
@@ -90,6 +100,7 @@ Component({
         meals,
         totals,
         mealCalories,
+        calorieTarget,
       });
     },
 

@@ -11,6 +11,11 @@
     </picker>
   </view>
 
+  <!-- 环形卡路里进度 -->
+  <view class="card ring-card">
+    <ring-chart current="{{totals.calories}}" target="{{calorieTarget}}" size="{{240}}" strokeWidth="{{20}}" />
+  </view>
+
   <!-- 四餐分段 -->
   <view wx:for="{{meals}}" wx:key="type" class="meal-section card">
     <view class="meal-header">

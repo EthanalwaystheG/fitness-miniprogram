@@ -34,9 +34,24 @@
   </view>
 
   <!-- 空状态 -->
-  <view wx:else class="empty-state" style="padding: 100rpx 0;">
+  <view wx:else class="empty-state" style="padding: 60rpx 0 30rpx;">
     <text>暂无训练记录</text>
     <text style="font-size: 24rpx; margin-top: 8rpx;">点击下方按钮添加训练动作</text>
+  </view>
+
+  <!-- PPL 训练模板 -->
+  <view class="section-title">训练模板</view>
+  <view class="template-list">
+    <view wx:for="{{templates}}" wx:key="key" class="card template-card" bindtap="onLoadTemplate" data-key="{{item.key}}">
+      <view class="template-header">
+        <text class="template-name">{{item.name}}</text>
+        <text class="template-arrow">→</text>
+      </view>
+      <text class="template-desc">{{item.description}}</text>
+      <view class="template-exercises">
+        <text wx:for="{{item.exercises}}" wx:for-item="ex" wx:key="name" class="template-ex-tag">{{ex.name}}</text>
+      </view>
+    </view>
   </view>
 
   <view style="height: 120rpx;"></view>

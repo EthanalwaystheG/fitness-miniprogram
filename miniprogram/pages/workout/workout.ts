@@ -1,5 +1,6 @@
 import { getWorkoutByDate, saveWorkoutRecord, deleteWorkoutRecord, generateId } from '../../utils/storage';
 import { today, formatDisplay } from '../../utils/date';
+import { PPL_TEMPLATES } from '../../data/templates';
 import type { WorkoutRecord, Exercise } from '../../types/index';
 
 Component({
@@ -13,6 +14,7 @@ Component({
     currentExercise: { name: '', sets: 3, reps: 10, weight: 0, note: '' } as Exercise,
     editIndex: -1,
     totalSets: 0,
+    templates: PPL_TEMPLATES,
   },
 
   lifetimes: {
@@ -115,6 +117,50 @@ Component({
 
     onCloseEditor() {
       this.setData({ showEditor: false });
+    },
+
+    onLoadTemplate(e: WechatMiniprogram.TouchEvent) {
+      const key = e.currentTarget.dataset.key as string;
+      const template = PPL_TEMPLATES.find((t) => t.key === key);
+      if (!template) return;
+
+      if (this.data.exercises.length > 0) {
+        wx.showModal({
+          title: '加载模板',
+          content: `当前已有 ${this.data.exercises.length} 个动作，加载"${template.name}"将追加到现有列表，是否继续？`,
+          success: (res) => {
+            if (res.confirm) this.applyTemplate(template.exercises);
+          },
+        });
+      } else {
+        this.applyTemplate(template.exercises);
+      }
+    },
+
+    applyTemplate(exercises: Array<{ name: string; sets: number; reps: number; weight: number; note: string }>) {
+      const { selectedDate, recordId } = this.data;
+
+      let record: WorkoutRecord;
+      const existing = getWorkoutByDate(selectedDate);
+      if (existing) {
+        record = existing;
+      } else {
+        record = {
+          id: recordId || generateId(),
+          date: selectedDate,
+          exercises: [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+      }
+
+      for (const ex of exercises) {
+        record.exercises.push({ ...ex, id: generateId() });
+      }
+      record.updatedAt = new Date().toISOString();
+      saveWorkoutRecord(record);
+      wx.showToast({ title: `已加载 ${exercises.length} 个动作`, icon: 'success' });
+      this.loadWorkout();
     },
 
     removeExercise(index: number) {

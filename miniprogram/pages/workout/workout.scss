@@ -90,6 +90,55 @@
   margin-top: var(--spacing-sm);
 }
 
+.template-list {
+  padding: 0 var(--spacing-md);
+}
+
+.template-card {
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+}
+
+.template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6rpx;
+}
+
+.template-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.template-arrow {
+  font-size: 28rpx;
+  color: var(--color-primary);
+}
+
+.template-desc {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.template-exercises {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+.template-ex-tag {
+  font-size: 20rpx;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
 .fab {
   position: fixed;
   right: 40rpx;
