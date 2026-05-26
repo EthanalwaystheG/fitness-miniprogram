@@ -1,0 +1,90 @@
+<navigation-bar title="今日概览" back="{{false}}" />
+
+<scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="page-scroll">
+  <!-- 日期 -->
+  <view class="date-header">
+    <text class="date-text">{{displayDate}}</text>
+  </view>
+
+  <!-- 无个人信息引导 -->
+  <view wx:if="{{!hasProfile}}" class="card guide-card">
+    <text class="guide-title">欢迎使用健身记录</text>
+    <text class="guide-desc">请先在"我的"页面设置个人信息，以便计算 BMR 和每日消耗。</text>
+    <button class="btn-guide" bindtap="onGoProfile">去设置</button>
+  </view>
+
+  <!-- 四卡片概览 -->
+  <view wx:if="{{hasProfile}}" class="summary-grid">
+    <view class="summary-card card">
+      <text class="card-value">{{tdee}}</text>
+      <text class="card-label">每日消耗</text>
+      <text class="card-unit">kcal</text>
+    </view>
+    <view class="summary-card card">
+      <text class="card-value {{calRemaining() >= 0 ? 'green' : 'red'}}">{{calRemaining()}}</text>
+      <text class="card-label">剩余热量</text>
+      <text class="card-unit">kcal</text>
+    </view>
+    <view class="summary-card card">
+      <text class="card-value">{{bmr}}</text>
+      <text class="card-label">基础代谢</text>
+      <text class="card-unit">BMR</text>
+    </view>
+    <view class="summary-card card">
+      <text class="card-value">{{latestWeight || '--'}}</text>
+      <text class="card-label">最新体重</text>
+      <text class="card-unit">kg</text>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions">
+    <view class="quick-btn" bindtap="onGoWorkout">
+      <text class="quick-icon">🏋️</text>
+      <text class="quick-label">记录训练</text>
+    </view>
+    <view class="quick-btn" bindtap="onGoDiet">
+      <text class="quick-icon">🍽️</text>
+      <text class="quick-label">记录饮食</text>
+    </view>
+    <view class="quick-btn" bindtap="onGoProfile">
+      <text class="quick-icon">📊</text>
+      <text class="quick-label">记录体重</text>
+    </view>
+  </view>
+
+  <!-- 今日训练摘要 -->
+  <view class="section-title">今日训练</view>
+  <view wx:if="{{hasWorkout}}" class="card">
+    <view class="summary-row">
+      <view class="summary-stat">
+        <text class="stat-number">{{exerciseCount}}</text>
+        <text class="stat-label">训练动作</text>
+      </view>
+      <view class="summary-stat">
+        <text class="stat-number">{{totalSets}}</text>
+        <text class="stat-label">总组数</text>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="card empty-card">
+    <text class="empty-text">今日暂无训练记录</text>
+    <text class="empty-link" bindtap="onGoWorkout">去添加 →</text>
+  </view>
+
+  <!-- 今日饮食摘要 -->
+  <view class="section-title">今日饮食</view>
+  <view wx:if="{{hasDiet}}" class="card">
+    <view class="calories-row">
+      <text class="cal-number">{{macroTotals.calories}}</text>
+      <text class="cal-unit">kcal</text>
+    </view>
+    <macro-bar protein="{{macroTotals.protein}}" carbs="{{macroTotals.carbs}}" fat="{{macroTotals.fat}}" />
+  </view>
+  <view wx:else class="card empty-card">
+    <text class="empty-text">今日暂无饮食记录</text>
+    <text class="empty-link" bindtap="onGoDiet">去添加 →</text>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</scroll-view>

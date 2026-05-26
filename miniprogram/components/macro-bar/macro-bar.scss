@@ -1,0 +1,56 @@
+.macro-bar {
+  width: 100%;
+}
+
+.bar-track {
+  display: flex;
+  height: 12rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  background: #F0F0F0;
+}
+
+.mini .bar-track {
+  height: 8rpx;
+}
+
+.bar-segment {
+  height: 100%;
+}
+
+.bar-segment.protein {
+  background: var(--color-protein);
+}
+
+.bar-segment.carbs {
+  background: var(--color-carbs);
+}
+
+.bar-segment.fat {
+  background: var(--color-fat);
+}
+
+.bar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24rpx;
+  margin-top: 12rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+}
+
+.legend-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.legend-dot.protein { background: var(--color-protein); }
+.legend-dot.carbs { background: var(--color-carbs); }
+.legend-dot.fat { background: var(--color-fat); }

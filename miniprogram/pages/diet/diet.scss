@@ -1,0 +1,156 @@
+.page-scroll {
+  height: 100vh;
+  padding-top: 4rpx;
+}
+
+.date-bar {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background: var(--color-card);
+  padding: 16rpx 36rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.date-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.date-arrow {
+  font-size: 20rpx;
+  color: var(--color-text-light);
+}
+
+// Meal sections
+.meal-section {
+  margin-bottom: 4rpx;
+}
+
+.meal-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1rpx solid #F5F5F5;
+  margin-bottom: var(--spacing-sm);
+}
+
+.meal-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.meal-calories {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  margin-left: var(--spacing-sm);
+}
+
+.meal-add {
+  margin-left: auto;
+  font-size: 24rpx;
+  color: var(--color-primary);
+  padding: 6rpx 12rpx;
+}
+
+.meal-empty {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 24rpx;
+  padding: var(--spacing-sm) 0;
+}
+
+// Food items
+.food-item {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #FAFAFA;
+}
+
+.food-item:last-child {
+  border-bottom: none;
+}
+
+.food-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.food-info {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.food-name {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.food-amount {
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}
+
+.food-cal {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.food-macros {
+  margin-bottom: 4rpx;
+}
+
+.food-actions {
+  display: flex;
+  gap: 20rpx;
+  font-size: 22rpx;
+  color: var(--color-text-light);
+}
+
+.food-actions .danger {
+  color: var(--color-danger);
+}
+
+// Daily totals
+.daily-totals {
+  margin-top: var(--spacing-sm);
+}
+
+.total-cal {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.total-number {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.total-unit {
+  font-size: 28rpx;
+  color: var(--color-text-secondary);
+  margin-left: 8rpx;
+}
+
+.macro-details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: var(--spacing-sm);
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+}

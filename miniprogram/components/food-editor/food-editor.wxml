@@ -1,0 +1,77 @@
+<view class="mask" bindtap="onCancel"></view>
+<view class="editor-panel">
+  <view class="editor-header">
+    <text class="editor-title">{{isNew ? '添加食物' : '编辑食物'}}</text>
+    <text class="editor-close" bindtap="onCancel">取消</text>
+  </view>
+
+  <scroll-view scroll-y class="editor-body">
+    <!-- 预设选择 -->
+    <view class="preset-section">
+      <text class="section-label">从食物库选择（可选）</text>
+      <view class="form-row-2">
+        <view class="form-group flex-1">
+          <text class="form-label">分类</text>
+          <picker value="{{categoryIndex}}" range="{{categoryLabels}}" bindchange="onCategoryChange">
+            <view class="form-input center picker">{{categoryLabels[categoryIndex]}}</view>
+          </picker>
+        </view>
+        <view class="form-group flex-1">
+          <text class="form-label">食物</text>
+          <picker value="{{foodNameIndex}}" range="{{foodNames}}" bindchange="onFoodSelect">
+            <view class="form-input center picker">{{foodNames[foodNameIndex] || '请选择'}}</view>
+          </picker>
+        </view>
+      </view>
+      <view wx:if="{{selectedPreset}}" class="preset-hint">
+        <text>已选：{{selectedPreset}}（每100g基准，调整份量自动换算）</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="form-group">
+      <text class="form-label">食物名称</text>
+      <input class="form-input" value="{{name}}" bindinput="onNameInput" placeholder="例如：鸡胸肉" />
+    </view>
+
+    <view class="form-row-2">
+      <view class="form-group flex-1">
+        <text class="form-label">份量</text>
+        <input class="form-input center" type="digit" value="{{amount}}" bindinput="onAmountInput" />
+      </view>
+      <view class="form-group flex-1">
+        <text class="form-label">单位</text>
+        <picker value="{{unitIndex}}" range="{{unitOptions}}" bindchange="onUnitChange">
+          <view class="form-input center picker">{{unit}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">热量 (kcal)</text>
+      <input class="form-input" type="digit" value="{{calories}}" bindinput="onCaloriesInput" placeholder="0" />
+    </view>
+
+    <text class="section-label">宏量营养素 (可选)</text>
+
+    <view class="form-row-3">
+      <view class="form-group flex-1">
+        <text class="form-label">蛋白质 (g)</text>
+        <input class="form-input center" type="digit" value="{{protein}}" bindinput="onProteinInput" placeholder="0" />
+      </view>
+      <view class="form-group flex-1">
+        <text class="form-label">碳水 (g)</text>
+        <input class="form-input center" type="digit" value="{{carbs}}" bindinput="onCarbsInput" placeholder="0" />
+      </view>
+      <view class="form-group flex-1">
+        <text class="form-label">脂肪 (g)</text>
+        <input class="form-input center" type="digit" value="{{fat}}" bindinput="onFatInput" placeholder="0" />
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="editor-footer">
+    <button class="btn-confirm" bindtap="onSave">保存</button>
+  </view>
+</view>

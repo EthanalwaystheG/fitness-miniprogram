@@ -1,0 +1,70 @@
+<navigation-bar title="饮食记录" back="{{false}}" />
+
+<scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="page-scroll">
+  <!-- 日期选择器 -->
+  <view class="date-bar">
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text class="date-text">{{displayDate}}</text>
+        <text class="date-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 四餐分段 -->
+  <view wx:for="{{meals}}" wx:key="type" class="meal-section card">
+    <view class="meal-header">
+      <text class="meal-title">{{mealLabels[item.type]}}</text>
+      <text class="meal-calories">{{mealCalories[item.type] || 0}} kcal</text>
+      <text class="meal-add" bindtap="onAddFood" data-type="{{item.type}}">+ 添加</text>
+    </view>
+
+    <!-- 食物列表 -->
+    <view wx:if="{{item.foods.length > 0}}" class="food-list">
+      <view wx:for="{{item.foods}}" wx:for-item="food" wx:for-index="foodIndex" wx:key="id" class="food-item">
+        <view class="food-main">
+          <view class="food-info">
+            <text class="food-name">{{food.name || '未命名'}}</text>
+            <text class="food-amount">{{food.amount}}{{food.unit}}</text>
+          </view>
+          <text class="food-cal">{{food.calories}} kcal</text>
+        </view>
+        <view class="food-macros">
+          <macro-bar protein="{{food.protein}}" carbs="{{food.carbs}}" fat="{{food.fat}}" mini="{{true}}" />
+        </view>
+        <view class="food-actions">
+          <text bindtap="onEditFood" data-meal-index="{{index}}" data-food-index="{{foodIndex}}">编辑</text>
+          <text class="danger" bindtap="onDeleteFood" data-meal-index="{{index}}" data-food-index="{{foodIndex}}">删除</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="meal-empty">暂无记录</view>
+  </view>
+
+  <!-- 每日总计 -->
+  <view wx:if="{{totals.calories > 0}}" class="card daily-totals">
+    <text class="section-title" style="padding: 0; margin-bottom: 16rpx;">今日总计</text>
+    <view class="total-cal">
+      <text class="total-number">{{totals.calories}}</text>
+      <text class="total-unit">kcal</text>
+    </view>
+    <macro-bar protein="{{totals.protein}}" carbs="{{totals.carbs}}" fat="{{totals.fat}}" />
+    <view class="macro-details">
+      <text>蛋白质 {{totals.protein}}g</text>
+      <text>碳水 {{totals.carbs}}g</text>
+      <text>脂肪 {{totals.fat}}g</text>
+    </view>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</scroll-view>
+
+<!-- 编辑弹窗 -->
+<food-editor
+  wx:if="{{showEditor}}"
+  food="{{currentFood}}"
+  isNew="{{isNewFood}}"
+  bind:save="onSaveFood"
+  bind:cancel="onCloseEditor"
+/>

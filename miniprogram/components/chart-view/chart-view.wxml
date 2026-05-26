@@ -1,0 +1,25 @@
+<view class="chart-container" style="width: {{width}}rpx; height: {{height}}rpx;">
+  <!-- Y轴标签 -->
+  <view class="y-axis" style="width: {{paddingLeft}}rpx; height: {{chartH}}rpx; top: {{paddingTop}}rpx;">
+    <view wx:for="{{yLabels}}" wx:key="*this" class="y-label">{{item}}</view>
+  </view>
+
+  <!-- 图表区域 -->
+  <view class="chart-area" style="left: {{paddingLeft}}rpx; top: {{paddingTop}}rpx; width: {{chartW}}rpx; height: {{chartH}}rpx;">
+    <!-- 网格线 -->
+    <view wx:if="{{showGrid}}" wx:for="{{yLabels}}" wx:key="*this" class="grid-line" style="bottom: {{(index / (yLabels.length - 1)) * chartH}}rpx;"></view>
+
+    <!-- 折线段 -->
+    <view wx:for="{{lines}}" wx:key="*this" class="line-segment" style="left: {{item.x1}}rpx; top: {{item.y1}}rpx; width: {{item.w}}rpx; transform: rotate({{item.angle}}deg); background: {{lineColor}};"></view>
+
+    <!-- 数据点 -->
+    <view wx:for="{{points}}" wx:key="date" class="data-point" style="left: {{item.x - pointRadius}}rpx; top: {{item.y - pointRadius}}rpx; width: {{pointRadius * 2}}rpx; height: {{pointRadius * 2}}rpx; background: {{lineColor}};">
+      <text class="point-label">{{item.value}}</text>
+    </view>
+  </view>
+
+  <!-- X轴标签 -->
+  <view class="x-axis" style="left: {{paddingLeft}}rpx; top: {{paddingTop + chartH + 8}}rpx; width: {{chartW}}rpx;">
+    <view wx:for="{{points}}" wx:key="date" class="x-label" style="left: {{item.x}}rpx;">{{formatDateLabel(item.date)}}</view>
+  </view>
+</view>

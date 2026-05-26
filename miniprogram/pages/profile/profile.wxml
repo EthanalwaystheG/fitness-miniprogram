@@ -1,0 +1,83 @@
+<navigation-bar title="我的" back="{{false}}" />
+
+<scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="page-scroll">
+  <!-- 个人信息表单 -->
+  <view class="section-title">个人信息</view>
+  <view class="card form-card">
+    <view class="form-row">
+      <text class="form-label">身高 (cm)</text>
+      <input class="form-input" type="digit" value="{{height}}" bindinput="onHeightInput" placeholder="170" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">体重 (kg)</text>
+      <input class="form-input" type="digit" value="{{weight}}" bindinput="onWeightInput" placeholder="65" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">年龄</text>
+      <input class="form-input" type="number" value="{{age}}" bindinput="onAgeInput" placeholder="25" />
+    </view>
+    <view class="form-row">
+      <text class="form-label">性别</text>
+      <picker value="{{genderIndex}}" range="{{genderOptions}}" bindchange="onGenderChange">
+        <view class="form-picker">{{genderOptions[genderIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
+      <text class="form-label">活动水平</text>
+      <picker value="{{activityIndex}}" range="{{activityOptions}}" bindchange="onActivityChange">
+        <view class="form-picker">{{activityOptions[activityIndex]}}</view>
+      </picker>
+    </view>
+    <button class="btn-save" bindtap="onSaveProfile">保存个人信息</button>
+  </view>
+
+  <!-- BMR / TDEE 卡片 -->
+  <view wx:if="{{hasProfile}}" class="bmr-card card">
+    <view class="bmr-row">
+      <view class="bmr-item">
+        <text class="bmr-value">{{bmr}}</text>
+        <text class="bmr-label">BMR (kcal/天)</text>
+        <text class="bmr-desc">基础代谢率</text>
+      </view>
+      <view class="bmr-divider"></view>
+      <view class="bmr-item">
+        <text class="bmr-value">{{tdee}}</text>
+        <text class="bmr-label">TDEE (kcal/天)</text>
+        <text class="bmr-desc">每日总消耗</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体重录入 -->
+  <view class="section-title">记录体重</view>
+  <view class="card weight-input-row">
+    <input class="weight-input" type="digit" value="{{newWeight}}" bindinput="onNewWeightInput" placeholder="输入今日体重 (kg)" />
+    <button class="btn-record" bindtap="onRecordWeight">记录</button>
+  </view>
+
+  <!-- 体重趋势图 -->
+  <view wx:if="{{chartData.length > 0}}" class="section-title">体重趋势</view>
+  <view wx:if="{{chartData.length > 0}}" class="card chart-card">
+    <chart-view data="{{chartData}}" lineColor="#07C160" height="{{350}}" />
+  </view>
+
+  <!-- 体重历史列表 -->
+  <view wx:if="{{weightHistory.length > 0}}" class="section-title">历史记录</view>
+  <view wx:if="{{weightHistory.length > 0}}" class="card weight-list">
+    <view wx:for="{{weightHistory}}" wx:key="id" class="weight-item">
+      <text class="weight-date">{{formatDate(item.date)}}</text>
+      <view class="weight-info">
+        <text class="weight-value">{{item.weight}} kg</text>
+        <text wx:if="{{getWeightChange(index)}}" class="weight-change {{item.weight > weightHistory[index + 1].weight ? 'up' : 'down'}}">{{getWeightChange(index)}} kg</text>
+      </view>
+      <view class="weight-delete" bindtap="onDeleteWeight" data-id="{{item.id}}">删除</view>
+    </view>
+  </view>
+
+  <view wx:if="{{weightHistory.length === 0}}" class="empty-state" style="padding: 60rpx 0;">
+    <text>暂无体重记录</text>
+    <text style="font-size: 24rpx; margin-top: 8rpx;">记录每日体重，追踪变化趋势</text>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</scroll-view>

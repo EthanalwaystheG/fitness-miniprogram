@@ -1,0 +1,54 @@
+page {
+  --color-primary: #07C160;
+  --color-primary-light: #E6F9EF;
+  --color-bg: #F5F5F5;
+  --color-card: #FFFFFF;
+  --color-text: #333333;
+  --color-text-secondary: #999999;
+  --color-text-light: #B0B0B0;
+  --color-danger: #FA5151;
+  --color-warning: #FFC300;
+  --color-protein: #FF6B6B;
+  --color-carbs: #FFD93D;
+  --color-fat: #6BCB77;
+  --spacing-xs: 8rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --radius: 16rpx;
+  --radius-lg: 24rpx;
+  height: 100vh;
+  background: var(--color-bg);
+  font-size: 28rpx;
+  color: var(--color-text);
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  margin: var(--spacing-sm) var(--spacing-md);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-secondary);
+}
+
+.empty-state text {
+  margin-top: var(--spacing-sm);
+}

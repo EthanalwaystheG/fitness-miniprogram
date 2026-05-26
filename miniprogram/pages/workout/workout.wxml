@@ -1,0 +1,55 @@
+<navigation-bar title="训练记录" back="{{false}}" />
+
+<scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="page-scroll">
+  <!-- 日期选择器 -->
+  <view class="date-bar">
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text class="date-text">{{displayDate}}</text>
+        <text class="date-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 训练列表 -->
+  <view wx:if="{{exercises.length > 0}}" class="exercise-list">
+    <view wx:for="{{exercises}}" wx:key="id" class="card exercise-card">
+      <view class="exercise-header">
+        <text class="exercise-name">{{item.name || '未命名动作'}}</text>
+        <view class="exercise-actions">
+          <text class="action-btn" bindtap="onEditExercise" data-index="{{index}}">编辑</text>
+          <text class="action-btn danger" bindtap="onDeleteExercise" data-index="{{index}}">删除</text>
+        </view>
+      </view>
+      <view class="exercise-detail">
+        <text class="detail-text">{{item.sets}} 组 × {{item.reps}} 次</text>
+        <text wx:if="{{item.weight > 0}}" class="detail-text">@ {{item.weight}} kg</text>
+      </view>
+      <text wx:if="{{item.note}}" class="exercise-note">{{item.note}}</text>
+    </view>
+
+    <view class="card summary-bar">
+      <text>共 {{exercises.length}} 项训练，{{totalSets}} 总组数</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state" style="padding: 100rpx 0;">
+    <text>暂无训练记录</text>
+    <text style="font-size: 24rpx; margin-top: 8rpx;">点击下方按钮添加训练动作</text>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+</scroll-view>
+
+<!-- FAB 添加按钮 -->
+<view class="fab" bindtap="onAddExercise">+</view>
+
+<!-- 编辑弹窗 -->
+<exercise-editor
+  wx:if="{{showEditor}}"
+  exercise="{{currentExercise}}"
+  isNew="{{isNewExercise}}"
+  bind:save="onSaveExercise"
+  bind:cancel="onCloseEditor"
+/>

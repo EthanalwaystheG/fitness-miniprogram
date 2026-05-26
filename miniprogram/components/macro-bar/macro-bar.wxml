@@ -1,0 +1,21 @@
+<view class="macro-bar {{mini ? 'mini' : ''}}">
+  <view class="bar-track">
+    <view wx:if="{{proteinPct > 0}}" class="bar-segment protein" style="width: {{proteinPct}}%;"></view>
+    <view wx:if="{{carbsPct > 0}}" class="bar-segment carbs" style="width: {{carbsPct}}%;"></view>
+    <view wx:if="{{fatPct > 0}}" class="bar-segment fat" style="width: {{fatPct}}%;"></view>
+  </view>
+  <view wx:if="{{!mini}}" class="bar-legend">
+    <view class="legend-item">
+      <view class="legend-dot protein"></view>
+      <text>蛋白质 {{protein}}g</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot carbs"></view>
+      <text>碳水 {{carbs}}g</text>
+    </view>
+    <view class="legend-item">
+      <view class="legend-dot fat"></view>
+      <text>脂肪 {{fat}}g</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "food-editor": "/components/food-editor/food-editor",
+    "macro-bar": "/components/macro-bar/macro-bar"
+  }
+}

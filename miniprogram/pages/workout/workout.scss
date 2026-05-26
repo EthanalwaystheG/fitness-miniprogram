@@ -1,0 +1,108 @@
+.page-scroll {
+  height: 100vh;
+  padding-top: 4rpx;
+}
+
+.date-bar {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  background: var(--color-card);
+  padding: 16rpx 36rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.date-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.date-arrow {
+  font-size: 20rpx;
+  color: var(--color-text-light);
+}
+
+.exercise-card {
+  margin-bottom: 4rpx;
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.exercise-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.exercise-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  color: var(--color-primary);
+  padding: 4rpx 8rpx;
+}
+
+.action-btn.danger {
+  color: var(--color-danger);
+}
+
+.exercise-detail {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.detail-text {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  background: #F5F5F5;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.exercise-note {
+  font-size: 24rpx;
+  color: var(--color-text-light);
+  display: block;
+  margin-top: 8rpx;
+}
+
+.summary-bar {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 26rpx;
+  margin-top: var(--spacing-sm);
+}
+
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 56rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(7, 193, 96, 0.35);
+  z-index: 100;
+}
