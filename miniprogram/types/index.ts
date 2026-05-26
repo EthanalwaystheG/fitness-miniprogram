@@ -2,6 +2,8 @@ export type Gender = 'male' | 'female';
 
 export type ActivityLevel = 1.2 | 1.375 | 1.55 | 1.725 | 1.9;
 
+export type Goal = 'lose_fat' | 'gain_muscle';
+
 export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
 
 export interface UserProfile {
@@ -10,6 +12,7 @@ export interface UserProfile {
   age: number;
   gender: Gender;
   activityLevel: ActivityLevel;
+  goal: Goal;
   updatedAt: string;
 }
 

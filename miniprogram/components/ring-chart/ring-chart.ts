@@ -2,6 +2,7 @@ Component({
   properties: {
     current: { type: Number, value: 0 },
     target: { type: Number, value: 2000 },
+    goal: { type: String, value: 'lose_fat' },
     size: { type: Number, value: 240 },
     strokeWidth: { type: Number, value: 20 },
     bgColor: { type: String, value: '#F0F0F0' },
@@ -16,25 +17,28 @@ Component({
     leftDeg: 0,
     halfSize: 120,
     innerSize: 110,
-    outerR: 110,
-    innerR: 100,
-    circumference: 0,
-    dashOffset: 0,
   },
 
   observers: {
-    'current, target, size, strokeWidth'(cur: number, tgt: number, sz: number, sw: number) {
+    'current, target, goal, size, strokeWidth'(cur: number, tgt: number, g: string, sz: number, sw: number) {
       const safeTarget = tgt || 2000;
       const pct = Math.round((cur / safeTarget) * 100);
       const halfSize = sz / 2;
       const innerSize = halfSize - sw;
 
       let ringColor = this.properties.progressColor as string;
-      if (pct > 100) ringColor = this.properties.overColor as string;
-      else if (pct >= 80) ringColor = '#FFC300';
 
-      // Right half-circle rotation: 0deg (0%) to 180deg (50%)
-      // Left half-circle rotation: 0deg (50%) to 180deg (100%)
+      if (g === 'gain_muscle') {
+        // 增肌模式: 吃不够=黄, 接近=蓝, 达标=绿
+        if (pct >= 100) ringColor = '#07C160';
+        else if (pct >= 80) ringColor = '#4A90D9';
+        else ringColor = '#FFC300';
+      } else {
+        // 减脂模式: 未超标=绿, 超标=红
+        if (pct >= 100) ringColor = this.properties.overColor as string;
+        else ringColor = '#07C160';
+      }
+
       const rightDeg = Math.min(pct, 50) * (180 / 50);
       const leftDeg = pct > 50 ? (pct - 50) * (180 / 50) : 0;
 

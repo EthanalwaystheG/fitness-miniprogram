@@ -1,10 +1,12 @@
 import { getUserProfile, saveUserProfile, getWeightHistory, addWeightRecord, deleteWeightRecord, generateId } from '../../utils/storage';
 import { calculateBMR, calculateTDEE, ACTIVITY_LABELS, ACTIVITY_OPTIONS } from '../../utils/bmr';
 import { today, formatDisplay } from '../../utils/date';
-import type { UserProfile, WeightRecord, Gender, ActivityLevel, ChartDataPoint } from '../../types/index';
+import type { UserProfile, WeightRecord, Gender, ActivityLevel, Goal, ChartDataPoint } from '../../types/index';
 
 const GENDER_OPTIONS: Gender[] = ['male', 'female'];
 const GENDER_LABELS = ['男', '女'];
+const GOAL_OPTIONS: Goal[] = ['lose_fat', 'gain_muscle'];
+const GOAL_LABELS = ['减脂/控卡', '系统增肌'];
 
 Component({
   data: {
@@ -18,6 +20,8 @@ Component({
     activityOptions: ACTIVITY_OPTIONS.map((a) => ACTIVITY_LABELS[a]) as string[],
     bmr: 0,
     tdee: 0,
+    goalIndex: 0,
+    goalOptions: GOAL_LABELS as string[],
     hasProfile: false,
     newWeight: '',
     weightHistory: [] as WeightRecord[],
@@ -42,6 +46,7 @@ Component({
       if (profile) {
         const genderIndex = GENDER_OPTIONS.indexOf(profile.gender);
         const activityIndex = ACTIVITY_OPTIONS.indexOf(profile.activityLevel);
+        const goalIndex = GOAL_OPTIONS.indexOf(profile.goal || 'lose_fat');
         this.setData({
           profile,
           height: profile.height,
@@ -49,6 +54,7 @@ Component({
           age: profile.age,
           genderIndex: genderIndex >= 0 ? genderIndex : 0,
           activityIndex: activityIndex >= 0 ? activityIndex : 2,
+          goalIndex: goalIndex >= 0 ? goalIndex : 0,
           hasProfile: true,
         });
         this.updateBMR();
@@ -95,8 +101,12 @@ Component({
       this.updateBMR();
     },
 
+    onGoalChange(e: WechatMiniprogram.PickerChange) {
+      this.setData({ goalIndex: Number(e.detail.value) });
+    },
+
     onSaveProfile() {
-      const { height, weight, age, genderIndex, activityIndex } = this.data;
+      const { height, weight, age, genderIndex, activityIndex, goalIndex } = this.data;
       if (!height || !weight || !age) {
         wx.showToast({ title: '请填写完整的身体数据', icon: 'none' });
         return;
@@ -107,6 +117,7 @@ Component({
         age,
         gender: GENDER_OPTIONS[genderIndex],
         activityLevel: ACTIVITY_OPTIONS[activityIndex],
+        goal: GOAL_OPTIONS[goalIndex],
         updatedAt: new Date().toISOString(),
       };
       saveUserProfile(profile);

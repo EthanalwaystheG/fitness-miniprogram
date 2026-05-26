@@ -13,15 +13,15 @@
     <button class="btn-guide" bindtap="onGoProfile">去设置</button>
   </view>
 
-  <!-- Hero: 剩余热量大卡片 -->
+  <!-- Hero: 目标热量大卡片 -->
   <view wx:if="{{hasProfile}}" class="hero-card card">
-    <text class="hero-label">剩余可摄入</text>
-    <text class="hero-value {{calRemaining() >= 0 ? 'green' : 'red'}}">{{calRemaining()}}</text>
+    <text class="hero-label">{{goalLabel}}</text>
+    <text class="hero-value {{goalStatus}}">{{goalValue}}</text>
     <text class="hero-unit">kcal</text>
     <view class="hero-bar-track">
-      <view class="hero-bar-fill {{calRemaining() >= 0 ? 'green' : 'red'}}" style="width: {{caloriesIn > tdee ? 100 : tdee > 0 ? caloriesIn / tdee * 100 : 0}}%;"></view>
+      <view class="hero-bar-fill {{goalStatus}}" style="width: {{barPct}}%;"></view>
     </view>
-    <text class="hero-sub">{{caloriesIn}} / {{tdee}} kcal 已摄入</text>
+    <text class="hero-sub">{{caloriesIn}} / {{goalTarget}} kcal 已摄入</text>
   </view>
 
   <!-- 三列小卡片 -->

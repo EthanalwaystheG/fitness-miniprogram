@@ -1,7 +1,9 @@
 import { getUserProfile, getWeightHistory, getWorkoutByDate, getDietByDate } from '../../utils/storage';
 import { calculateBMR, calculateTDEE } from '../../utils/bmr';
 import { today, formatDisplay } from '../../utils/date';
-import type { MacroTotals } from '../../types/index';
+import type { MacroTotals, Goal } from '../../types/index';
+
+const GAIN_SURPLUS = 300;
 
 Component({
   data: {
@@ -16,6 +18,13 @@ Component({
     macroTotals: { calories: 0, protein: 0, carbs: 0, fat: 0 } as MacroTotals,
     hasWorkout: false,
     hasDiet: false,
+    // Goal mode
+    goal: 'lose_fat' as Goal,
+    goalTarget: 2000,
+    goalLabel: '热量缺口',
+    goalValue: 0,
+    goalStatus: 'green',
+    barPct: 0,
   },
 
   lifetimes: {
@@ -37,10 +46,12 @@ Component({
       const profile = getUserProfile();
       let bmr = 0;
       let tdee = 0;
+      let goal: Goal = 'lose_fat';
 
       if (profile) {
         bmr = calculateBMR(profile.weight, profile.height, profile.age, profile.gender);
         tdee = calculateTDEE(bmr, profile.activityLevel);
+        goal = profile.goal || 'lose_fat';
       }
 
       const weightHistory = getWeightHistory();
@@ -66,6 +77,24 @@ Component({
         macroTotals.calories = caloriesIn;
       }
 
+      // Goal-aware calculations
+      const goalTarget = goal === 'lose_fat' ? tdee : tdee + GAIN_SURPLUS;
+      let goalLabel: string;
+      let goalValue: number;
+      let goalStatus: string;
+
+      if (goal === 'lose_fat') {
+        goalLabel = '热量缺口';
+        goalValue = tdee - caloriesIn;
+        goalStatus = goalValue > 0 ? 'green' : 'red';
+      } else {
+        goalLabel = '还需摄入';
+        goalValue = goalTarget - caloriesIn;
+        goalStatus = goalValue <= 0 ? 'green' : 'yellow';
+      }
+
+      const barPct = goalTarget > 0 ? Math.min(100, (caloriesIn / goalTarget) * 100) : 0;
+
       this.setData({
         hasProfile: !!profile,
         bmr,
@@ -77,6 +106,12 @@ Component({
         macroTotals,
         hasWorkout: exerciseCount > 0,
         hasDiet: caloriesIn > 0,
+        goal,
+        goalTarget,
+        goalLabel,
+        goalValue,
+        goalStatus,
+        barPct,
       });
     },
 
@@ -90,10 +125,6 @@ Component({
 
     onGoProfile() {
       wx.switchTab({ url: '/pages/profile/profile' });
-    },
-
-    calRemaining(): number {
-      return this.data.tdee - this.data.caloriesIn;
     },
   },
 });

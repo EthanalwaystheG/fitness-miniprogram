@@ -1,7 +1,9 @@
 import { getDietByDate, saveDietRecord, deleteDietRecord, generateId, getUserProfile } from '../../utils/storage';
 import { calculateBMR, calculateTDEE } from '../../utils/bmr';
 import { today, formatDisplay } from '../../utils/date';
-import type { DietRecord, Meal, FoodItem, MealType, MacroTotals } from '../../types/index';
+import type { DietRecord, Meal, FoodItem, MealType, MacroTotals, Goal } from '../../types/index';
+
+const GAIN_SURPLUS = 300;
 
 const MEAL_LABELS: Record<MealType, string> = {
   breakfast: '早餐',
@@ -52,6 +54,7 @@ Component({
     editMealIndex: -1,
     editFoodIndex: -1,
     calorieTarget: 2000,
+    goal: 'lose_fat' as Goal,
   },
 
   lifetimes: {
@@ -69,12 +72,15 @@ Component({
 
   methods: {
     loadDiet() {
-      // Load TDEE target
+      // Load TDEE target with goal adjustment
       const profile = getUserProfile();
       let calorieTarget = 2000;
+      let goal: Goal = 'lose_fat';
       if (profile) {
         const bmr = calculateBMR(profile.weight, profile.height, profile.age, profile.gender);
-        calorieTarget = calculateTDEE(bmr, profile.activityLevel);
+        const tdee = calculateTDEE(bmr, profile.activityLevel);
+        goal = profile.goal || 'lose_fat';
+        calorieTarget = goal === 'lose_fat' ? tdee : tdee + GAIN_SURPLUS;
       }
 
       const record = getDietByDate(this.data.selectedDate);
@@ -101,6 +107,7 @@ Component({
         totals,
         mealCalories,
         calorieTarget,
+        goal,
       });
     },
 

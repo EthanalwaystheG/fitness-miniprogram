@@ -29,6 +29,12 @@
       </picker>
     </view>
     <view class="form-row">
+      <text class="form-label">目标</text>
+      <picker value="{{goalIndex}}" range="{{goalOptions}}" bindchange="onGoalChange">
+        <view class="form-picker">{{goalOptions[goalIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-row">
       <text class="form-label">活动水平</text>
       <picker value="{{activityIndex}}" range="{{activityOptions}}" bindchange="onActivityChange">
         <view class="form-picker">{{activityOptions[activityIndex]}}</view>

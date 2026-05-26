@@ -69,6 +69,7 @@
 
 .hero-value.green { color: var(--color-primary); }
 .hero-value.red { color: var(--color-danger); }
+.hero-value.yellow { color: var(--color-warning); }
 
 .hero-unit {
   font-size: 28rpx;
@@ -94,6 +95,7 @@
 
 .hero-bar-fill.green { background: var(--color-primary); }
 .hero-bar-fill.red { background: var(--color-danger); }
+.hero-bar-fill.yellow { background: var(--color-warning); }
 
 .hero-sub {
   font-size: 24rpx;

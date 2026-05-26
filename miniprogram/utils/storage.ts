@@ -23,7 +23,11 @@ function safeSet<T>(key: string, value: T): void {
 const PROFILE_KEY = 'fitness_user_profile';
 
 export function getUserProfile(): UserProfile | null {
-  return safeGet<UserProfile | null>(PROFILE_KEY, null);
+  const profile = safeGet<UserProfile | null>(PROFILE_KEY, null);
+  if (profile && !(profile as Record<string, unknown>).goal) {
+    (profile as Record<string, unknown>).goal = 'lose_fat';
+  }
+  return profile;
 }
 
 export function saveUserProfile(profile: UserProfile): void {
