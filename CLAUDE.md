@@ -18,7 +18,8 @@ miniprogram/
 ├── types/index.ts                  ← 所有 TS 类型定义
 ├── data/
 │   ├── foods.ts                    ← 食物预设数据库 (6分类46种)
-│   └── exercises.ts                ← 动作库 (6部位60动作)
+│   ├── exercises.ts                ← 动作库 (6部位60动作)
+│   └── templates.ts                ← PPL三分化训练模板
 ├── utils/
 │   ├── storage.ts                  ← 本地存储 CRUD 封装
 │   ├── bmr.ts                      ← BMR/TDEE 计算 (Mifflin-St Jeor)
@@ -27,9 +28,14 @@ miniprogram/
 ├── components/
 │   ├── navigation-bar/             ← 自定义导航栏
 │   ├── chart-view/                 ← 纯 view 体重趋势折线图
+│   ├── ring-chart/                 ← 环形卡路里进度图
 │   ├── exercise-editor/            ← 训练动作编辑弹窗
 │   ├── food-editor/                ← 食物编辑弹窗
+│   ├── template-picker/            ← 训练模板半屏选择弹窗
 │   └── macro-bar/                  ← 宏量营养素占比条
+├── images/tab/                     ← Tab 栏线条风格 PNG 图标
+├── scripts/
+│   └── generate-icons.cjs          ← 图标生成脚本
 └── pages/
     ├── index/                      ← Tab1 今日概览 Dashboard
     ├── workout/                    ← Tab2 训练记录
@@ -77,12 +83,17 @@ miniprogram/
 | `fitness_weight_history` | `WeightRecord[]` |
 | `fitness_workouts` | `WorkoutRecord[]` |
 | `fitness_diets` | `DietRecord[]` |
+| `fitness_workout_templates` | `CustomTemplate[]` |
 
 ## 当前状态
-- 4 个 Tab 页面功能完整
-- 5 个自定义组件可用
-- 食物预设数据库 6 分类 46 种食物（每 100g 营养数据）
+- 4 个 Tab 页面功能完整，支持减脂/增肌双模式切换
+- 7 个自定义组件（含 ring-chart, template-picker）
+- 线条风格 PNG Tab 图标（scripts/generate-icons.cjs 生成）
+- 食物预设数据库 6 分类 46 种（每 100g 营养数据）
 - 动作库 6 部位 60 个预设动作（含目标肌群）
-- food-editor / exercise-editor 支持从预设库选择
-- 本地存储 CRUD 已封装
-- 待完善: Tab 图标、数据导出、真机测试
+- PPL 三分化训练模板（推/拉/腿）+ 自定义模板保存
+- food-editor / exercise-editor 支持预设库 + 模板半屏弹窗选择
+- 概览页 Hero 卡片动态展示热量缺口/盈余
+- 饮食页环形卡路里进度图，目标感知颜色
+- 本地存储 CRUD 已封装，5 个 storage key
+- 待完善: 数据导出、周/月统计、真机测试
